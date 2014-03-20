@@ -46,9 +46,14 @@ class Order
          m.reply("!order [open|close|what you want to order]")
          return
        elsif($1=="open")
-         @open=true
-         File.open('order.html','w')  {|f| f.write("") }
-         m.reply("ordering is now open, order with: !order foo with a shot of bar please")
+         if(@open==true)
+           m.reply("there is already an order open")
+         else
+           @open=true
+           @orders={}
+           File.open('order.html','w')  {|f| f.write("") }
+           m.reply("ordering is now open, order with: !order foo with a shot of bar please")
+         end
          return
        elsif($1=="close")
          @open=false
@@ -71,6 +76,13 @@ class Order
        else
          @orders[m.user.nick.downcase]="#{$1}<br>"
        end
+     elsif( arg =~/^!order$/)
+       if(@open==true)
+         m.reply("there is an open order, use !order something, to place yours")
+       else
+         m.reply("there is no order, open one with !order open")
+       end 
      end
+       
   end
 end
