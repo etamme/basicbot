@@ -73,6 +73,8 @@ class Order
        elsif($1=="")
          m.reply("you can't ask to order nothing")
          return
+       elsif($1 =~ /^for=([^ ]+) (.+)$/)
+         @orders[$1.downcase]="#{$2}<br>"
        else
          @orders[m.user.nick.downcase]="#{$1}<br>"
        end
