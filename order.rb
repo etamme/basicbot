@@ -42,6 +42,7 @@ class Order
 
   def execute(m,arg)
      if( arg =~ /^!order (.+)$/ )
+       original_order = $1
        if($1=="help")
          m.reply("!order [open|close|what you want to order]")
          return
@@ -76,7 +77,7 @@ class Order
        elsif($1 =~ /^for=([^ ]+) (.+)$/)
          @orders[$1.downcase]="#{$2}<br>"
        else
-         @orders[m.user.nick.downcase]="#{$1}<br>"
+         @orders[m.user.nick.downcase]="#{original_order}<br>"
        end
      elsif( arg =~/^!order$/)
        if(@open==true)
