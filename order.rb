@@ -8,7 +8,7 @@ class Order
   include Cinch::Plugin
   @help="!order"
   match(/(.+)/,{:use_prefix => false})
-  
+
   def initialize(*args)
     super
     @open=false
@@ -44,7 +44,7 @@ class Order
      if( arg =~ /^!order (.+)$/ )
        original_order = $1
        if($1=="help")
-         m.reply("!order [open|close|what you want to order]")
+         m.reply("!order [open|close|check|what you want to order]")
          return
        elsif($1=="open")
          if(@open==true)
@@ -71,6 +71,14 @@ class Order
        elsif(@open!=true)
          m.reply("sorry, there is no open order")
          return
+       elsif($1=="check")
+         nick=m.user.nick.downcase
+         order=@orders[nick][0..-5] #trim <br>
+         if (order)
+           m.reply("#{nick}, I have you down for '#{order}'. (HTML)")
+         else
+           m.reply("#{nick}, you have not ordered anything yet.")
+         end
        elsif($1=="")
          m.reply("you can't ask to order nothing")
          return
@@ -84,8 +92,8 @@ class Order
          m.reply("there is an open order, use !order something, to place yours")
        else
          m.reply("there is no order, open one with !order open")
-       end 
+       end
      end
-       
+
   end
 end
