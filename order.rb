@@ -52,30 +52,30 @@ class Order
          else
            @open=true
            @orders={}
-           File.open('order.html','w')  {|f| f.write("") }
+           File.open('index.html','w')  {|f| f.write("") }
            m.reply("ordering is now open, order with: !order foo with a shot of bar please")
          end
          return
        elsif($1=="close")
          @open=false
          m.reply("this order has been closed")
-         File.open( 'order.html', 'w' ) do |f|
+         File.open('index.html', 'w' ) do |f|
            f.puts "<html><head><title>coffeebot order</title></head><body>"
            @orders.each do |nick,order|
              f.puts "#{nick}: #{order}<br>"
            end
            f.puts "</body></html>"
          end
-         m.reply("view at http://www.hydra.uphreak.com/order.html")
+         m.reply("view at http://coffeebot.uphreak.com/")
          return
        elsif(@open!=true)
          m.reply("sorry, there is no open order")
          return
        elsif($1=="check")
          nick=m.user.nick.downcase
-         order=@orders[nick][0..-5] #trim <br>
-         if (order)
-           m.reply("#{nick}, I have you down for '#{order}'. (HTML)")
+         if (@orders[nick]!=nil)
+           order=@orders[nick][0..-5] #trim <br>
+           m.reply("#{nick}, I have you down for '#{order}'.")
          else
            m.reply("#{nick}, you have not ordered anything yet.")
          end
