@@ -11,6 +11,7 @@ class Order
 
   def initialize(*args)
     super
+    @slack=false
     @open=false
     @orders={}
   end
@@ -53,7 +54,11 @@ class Order
            @open=true
            @orders={}
            File.open('index.html','w')  {|f| f.write("") }
-           m.reply("ordering is now open @here, order with: !order foo with a shot of bar please")
+           if(@slack)
+             m.reply("ordering is now open @here, order with: !order foo with a shot of bar please")
+           else
+             m.reply("ordering is now open, order with: !order foo with a shot of bar please")
+           end
          end
          return
        elsif($1=="close")
