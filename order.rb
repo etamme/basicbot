@@ -53,7 +53,7 @@ class Order
            @open=true
            @orders={}
            File.open('index.html','w')  {|f| f.write("") }
-           m.reply("ordering is now open, order with: !order foo with a shot of bar please")
+           m.reply("ordering is now open @here, order with: !order foo with a shot of bar please")
          end
          return
        elsif($1=="close")
