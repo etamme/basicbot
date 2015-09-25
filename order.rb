@@ -55,7 +55,7 @@ class Order
            @orders={}
            File.open('index.html','w')  {|f| f.write("") }
            if(@slack)
-             m.reply("ordering is now open @here, order with: !order foo with a shot of bar please")
+             m.reply("ordering is now open <!here>, order with: !order foo with a shot of bar please")
            else
              m.reply("ordering is now open, order with: !order foo with a shot of bar please")
            end
