@@ -59,6 +59,7 @@ class Order
            else
              m.reply("ordering is now open, order with: !order foo with a shot of bar please")
            end
+           m.reply("(it's on the company, so don't worry about having cash on you)")
          end
          return
        elsif($1=="close")
