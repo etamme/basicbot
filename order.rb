@@ -72,6 +72,10 @@ class Order
            f.puts "</body></html>"
          end
          m.reply("view at http://coffeebot.uphreak.com/")
+         helper_threshold=8
+         if(orders.length>helper_threshold)
+           m.reply("There are more than #{helper_threshold} orders, would anyone <!here> like to help carry them?")
+         end
          return
        elsif(@open!=true)
          m.reply("sorry, there is no open order")
