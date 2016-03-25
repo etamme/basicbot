@@ -73,7 +73,7 @@ class Order
          end
          m.reply("view at http://coffeebot.uphreak.com/")
          helper_threshold=8
-         if(orders.length>helper_threshold)
+         if(@orders.length>helper_threshold)
            if(@slack)
              m.reply("There are more than #{helper_threshold} orders, would anyone <!here> like to help carry them?")
            else
