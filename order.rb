@@ -78,6 +78,7 @@ class Order
              m.reply("There are more than #{helper_threshold} orders, would anyone <!here> like to help carry them?")
            else
              m.reply("There are more than #{helper_threshold} orders, would anyone here like to help carry them?")
+           end
          end
          return
        elsif(@open!=true)
