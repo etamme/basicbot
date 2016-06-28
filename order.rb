@@ -65,7 +65,9 @@ class Order
          @open=false
          m.reply("this order has been closed")
          File.open('index.html', 'w' ) do |f|
-           f.puts "<html><head><title>coffeebot order</title></head><body>"
+           f.puts "<html><head><title>coffeebot order</title>"
+           f.puts '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'
+           f.puts "</head><body>"
            @orders.each do |nick,order|
              f.puts "#{nick}: #{order}<br>"
            end
